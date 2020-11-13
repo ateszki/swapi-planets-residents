@@ -1,18 +1,20 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const PlanetItem = ({index,planet}) => {
-    const history = useHistory();
-    const handleRowClick = () => {
-        history.push(`/planet/${planet.slug}`);
-    }
+const PlanetItem = ({ planet }) => {
+
+    const { name, slug, climate, terrain, residents} = planet;
     return (
-        <tr onClick={handleRowClick} className={`cursor-pointer ${(index % 2 === 0) ? "bg-grey-200" : "bg-gray-400"}`}>
-            <td className="border px-4 py-2"><Link to={`/planet/${planet.slug}`}>{planet.name}</Link></td>
-            <td className="border px-4 py-2 text-left hidden lg:table-cell">{planet.climate}</td>
-            <td className="border px-4 py-2 text-left hidden lg:table-cell">{planet.terrain}</td>
-            <td className="border px-4 py-2 text-center">{planet.residents.length}</td>
-        </tr>
+        <Link  to={`/planet/${slug}`} className="max-w-sm border border-black rounded overflow-hidden shadow-lg">
+            <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">{name}</div>
+                <div className="text-gray-700 text-base h-24 mb-4">
+                    <div><b>Residents: </b> {residents.length}</div>
+                    <div><b>Climate: </b>{ climate }</div>
+                    <div><b>Terrain:</b> { terrain }</div>
+                </div>
+            </div>
+        </Link>
     )
 }
 

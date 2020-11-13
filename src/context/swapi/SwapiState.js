@@ -7,6 +7,7 @@ import SwapiReducer from './swapiReducer';
 
 import {
     GET_PLANETS,
+    GET_RESIDENTS,
     GET_PLANET,
     GET_RESIDENT,
     FILTER_PLANETS,
@@ -28,7 +29,11 @@ const SwapiState = props => {
         filter: '',
         residents: [],
         resident: {},
-        loading: false
+        loading: {
+            planets: false,
+            planet: false,
+            residents: false
+        }
     };
 
     const [state,dispatch] = useReducer(SwapiReducer,initialState);
@@ -37,7 +42,9 @@ const SwapiState = props => {
     // get all planets
     const getPlanets = async () => {
         
-        setLoading();
+        setLoading('planets');
+        setLoading('planet');
+        
         var next  = PLANETS_ENDPOINT;
         var results = [];
         
@@ -57,7 +64,17 @@ const SwapiState = props => {
 
     // get planet from slug
     const getPlanet = async planet_slug => {
-        setLoading();
+        setLoading('planet');
+
+        const planet = state.planets.find(planet => planet.slug === planet_slug);
+        
+        dispatch({ type: GET_PLANET, payload: {planet} } );     
+    }
+
+    // get residents
+    const getResidents = async planet_slug => {
+        setLoading('residents');
+        
         const planet = state.planets.find(planet => planet.slug === planet_slug);
         
         const residents = await Promise.all(planet.residents.map(async endpoint => {
@@ -67,9 +84,10 @@ const SwapiState = props => {
             return resident;
         }));
         
-        dispatch({ type: GET_PLANET, payload: {planet, residents} } );     
+        dispatch({ type: GET_RESIDENTS, payload: { residents } } );     
     }
-    // get planet from slug
+
+    // get resident from slug
     const getResident = async resident_slug => {
         const resident = state.residents.find(resident => resident.slug === resident_slug);
         
@@ -84,7 +102,7 @@ const SwapiState = props => {
 
 
     // set loading
-    const setLoading = () => dispatch({ type: SET_LOADING });
+    const setLoading = (type) => dispatch({ type: SET_LOADING, payload: type });
 
     return <SwapiContext.Provider 
     value = {{
@@ -97,6 +115,7 @@ const SwapiState = props => {
         getPlanets,
         getPlanet,
         getResident,
+        getResidents,
         filterPlanets,       
         clearPlanet,
         clearResident 

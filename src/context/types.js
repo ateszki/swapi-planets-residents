@@ -4,4 +4,5 @@ export const CLEAR_PLANET = 'CLEAR_PLANET';
 export const GET_PLANETS = 'GET_PLANETS';
 export const GET_RESIDENT = 'GET_RESIDENT';
 export const CLEAR_RESIDENT = 'CLEAR_RESIDENT';
+export const GET_RESIDENTS = 'GET_RESIDENTS';
 export const SET_LOADING = 'SET_LOADING';

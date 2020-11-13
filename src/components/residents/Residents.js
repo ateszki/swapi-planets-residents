@@ -1,29 +1,20 @@
 import React, { useContext } from 'react';
 import ResidentItem from './ResidentItem';
+import Spinner from '../layouts/Spinner';
 import SwapiContext from '../../context/swapi/swapiContext'; 
-
 
 
 const Residents = () => {
     const swapiContext = useContext(SwapiContext);
-    const { residents } = swapiContext;
+    const { residents, loading } = swapiContext;
 
+    if (loading.residents) return <Spinner />;
     return (
         <div className="container mx-auto">
-            <h2 className="text-4xl bold">Residents ({residents.length})</h2>
             {residents.length > 0 ? (
-                <table className="table-auto w-full">
-                <thead>
-                    <tr>
-                    <th className="px-4 py-2 w-2/4 text-left">Resident</th>
-                    <th className="px-4 py-2 w-1/4">Height</th>
-                    <th className="px-4 py-2 w-1/4">Mass</th>
-                    </tr>
-                </thead>
-                <tbody>
-                { residents.map((resident, idx) => <ResidentItem key={idx} index={idx} resident={resident} />)}
-                </tbody>
-                </table>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                { residents.map((resident, idx) => <ResidentItem key={idx} resident={resident} />)}
+                </div>
             ): (<div>There are no residents in this country</div>)
             }
              

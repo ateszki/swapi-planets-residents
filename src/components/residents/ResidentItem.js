@@ -1,20 +1,24 @@
 import React, { useContext } from 'react'
-import { Link , useHistory} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SwapiContext from '../../context/swapi/swapiContext'; 
 
-const ResidentItem = ({ index, resident }) => {
+const ResidentItem = ({ resident }) => {
     const swapiContext = useContext(SwapiContext);
     const { planet } = swapiContext;
-    const history = useHistory();
-    const handleRowClick = () => {
-        history.push(`/planet/${planet.slug}/resident/${resident.slug}`);
-    }
+    
+    const { name, slug, height, mass, birth_year } = resident;
+    
     return (
-        <tr onClick={handleRowClick} className={`cursor-pointer ${(index % 2 === 0) ? "bg-grey-200" : "bg-gray-400"}`}>
-            <td className="border px-4 py-2"><Link to={`/planet/${planet.slug}/resident/${resident.slug}`}>{resident.name}</Link></td>
-            <td className="border px-4 py-2 text-center">{resident.height}</td>
-            <td className="border px-4 py-2 text-center">{resident.mass}</td>
-        </tr>
+        <Link  to={`/planet/${planet.slug}/resident/${slug}`} className="max-w-sm border border-black rounded overflow-hidden shadow-lg mx-2">
+            <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">{name}</div>
+                <div className="text-gray-700 text-base h-24 mb-4">
+                    <div><b>Height: </b>{ height }</div>
+                    <div><b>Mass:</b> { mass }</div>
+                    <div><b>Birth:</b> {birth_year}</div>
+                </div>
+            </div>
+        </Link>
     )
 }
 

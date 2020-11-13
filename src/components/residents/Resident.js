@@ -28,8 +28,8 @@ const Resident = ({ match }) => {
         <div>
             <Breadcrumb  />
             <div className="container mx-auto">
-                <h1 className="mx-2 text-6xl bold">{resident.name}</h1>
-                <ul>
+                <h1 className="mx-2 text-6xl bold border-b-2 border-black my-6">{resident.name}</h1>
+                <ul className="mx-2">
                     <li>Mass: {mass}</li>
                     <li>Height: {height}</li>
                     <li>Hair color: {hair_color}</li>

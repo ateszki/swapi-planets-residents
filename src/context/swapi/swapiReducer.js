@@ -1,6 +1,7 @@
 import {
     GET_PLANETS,
     GET_PLANET,
+    GET_RESIDENTS,
     GET_RESIDENT,
     CLEAR_PLANET,
     CLEAR_RESIDENT,
@@ -14,20 +15,24 @@ const swapiReducer = (state,action) => {
             return {
                 ...state,
                 planets: action.payload,
-                loading: false
+                loading: {...state.loading, planets: false}
             }
         case GET_PLANET:
             return {
                 ...state,
                 planet: action.payload.planet,
+                loading: {...state.loading, planet: false}
+            }
+        case GET_RESIDENTS:
+            return {
+                ...state,
                 residents: action.payload.residents,
-                loading:false
+                loading: {...state.loading, residents: false}
             }
         case GET_RESIDENT:
             return {
                 ...state,
-                resident: action.payload,
-                loading: false
+                resident: action.payload
             }
         case FILTER_PLANETS:
             return {
@@ -38,7 +43,8 @@ const swapiReducer = (state,action) => {
             return {
                 ...state,
                 planet: {},
-                resident: {}
+                resident: {},
+                residents: []
             }
         case CLEAR_RESIDENT:
             return {
@@ -46,9 +52,14 @@ const swapiReducer = (state,action) => {
                 resident: {}
             }
         case SET_LOADING:
+            //let loading = {...state.loading}
+            //loading[action.payload] = true; 
             return {
                 ...state,
-                loading: true
+                loading: {
+                    ...state.loading,
+                    [action.payload]: true
+                }
             } 
         default:
             return state;

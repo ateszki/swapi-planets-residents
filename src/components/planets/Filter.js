@@ -4,17 +4,17 @@ import SwapiContext from '../../context/swapi/swapiContext';
 
 const Filter = () => {
     const swapiContext = useContext(SwapiContext);
-    const [text, setText] = useState('');
     const { filterPlanets } = swapiContext;
 
+    const [text, setText] = useState('');
     const onChange = (e) => setText(e.target.value);
-
     const onClear = () => setText('');
 
     useEffect( () => {
         filterPlanets(text);
         // eslint-disable-next-line
     },[text] )
+    
     return (
         <div className="container mx-auto py-8">
             <div className="flex items-center">
