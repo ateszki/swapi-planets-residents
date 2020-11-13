@@ -9,12 +9,10 @@ import {
     GET_PLANETS,
     GET_PLANET,
     GET_RESIDENT,
-    /* 
     FILTER_PLANETS,
-    GET_PLANET,
+    SET_LOADING,
     CLEAR_PLANET,
-    CLEAR_RESIDENT,*/
-    SET_LOADING
+    CLEAR_RESIDENT
 } from '../types';
 
 import {
@@ -27,6 +25,7 @@ const SwapiState = props => {
     const initialState = {
         planets: [],
         planet: {},
+        filter: '',
         residents: [],
         resident: {},
         loading: false
@@ -58,7 +57,7 @@ const SwapiState = props => {
 
     // get planet from slug
     const getPlanet = async planet_slug => {
-        
+        setLoading();
         const planet = state.planets.find(planet => planet.slug === planet_slug);
         
         const residents = await Promise.all(planet.residents.map(async endpoint => {
@@ -77,31 +76,13 @@ const SwapiState = props => {
         dispatch({ type: GET_RESIDENT, payload: resident } );     
     }
 
-/* 
-    // search users
-    const searchUsers = async text  => {
-        setLoading();
-        const res = await axios.get(PLANETS_ENDPOINT);
-        dispatch({ type: SEARCH_USERS, payload: res.data.items } );
-    }
+    const filterPlanets = text =>  dispatch({ type: FILTER_PLANETS, payload: text});
 
-    // get user
-    const getUser = async login => {
-        setLoading();
-        const res = await axios.get(`https://api.github.com/users/${login}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-        dispatch({ type: GET_USER, payload: res.data });
-      }
+    const clearPlanet = () => dispatch({ type: CLEAR_PLANET});
 
-    // search repos
-    const getUserRepos = async login => {
-        setLoading();
-        const res = await axios.get(`https://api.github.com/users/${login}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-        dispatch({ type: GET_REPOS, payload: res.data });
-      }
+    const clearResident = () => dispatch({ type: CLEAR_RESIDENT});
 
-    // clear users
-    const clearUsers = () => dispatch({ type: CLEAR_USERS});
-  */   
+
     // set loading
     const setLoading = () => dispatch({ type: SET_LOADING });
 
@@ -112,12 +93,13 @@ const SwapiState = props => {
         residents: state.residents,
         resident: state.resident,
         loading: state.loading,
+        filter: state.filter,
         getPlanets,
         getPlanet,
         getResident,
-/*         
+        filterPlanets,       
         clearPlanet,
-        clearResident */
+        clearResident 
     }}
     >
         {props.children}

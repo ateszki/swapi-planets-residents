@@ -4,7 +4,7 @@ const About = () => {
     return (
         <div>
             <h1>About</h1>
-            <p>App for listing Star Wars API Plantes and Residents</p>
+            <p>Star Wars API Planets and Residents</p>
         </div>
     )
 }

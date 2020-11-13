@@ -4,14 +4,15 @@ import Planets from '../planets/Planets';
 import Breadcrumb from '../layouts/Breadcrumb';
 import SwapiContext from '../../context/swapi/swapiContext'; 
 
-function Home() {
+const Home = () => {
     const swapiContext = useContext(SwapiContext);
-    const { loading, getPlanets, planets } = swapiContext;
+    const { loading, getPlanets, planets, clearPlanet } = swapiContext;
 
     
     useEffect( () => {
         // call the planet list only once
         if (planets.length === 0)  getPlanets();
+        clearPlanet();
         // eslint-disable-next-line
     },[] )
 

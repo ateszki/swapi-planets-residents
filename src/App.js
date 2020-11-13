@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // layout components
 import Navbar from './components/layouts/Navbar';
+import Footer from './components/layouts/Footer';
 
 // components
 import Planet from './components/planets/Planet';
@@ -17,8 +18,6 @@ import NotFound from './components/pages/NotFound';
 // State providers
 import SwapiState from './context/swapi/SwapiState';
 
-// styles
-import './App.css';
 
 
 const App = () => {
@@ -36,6 +35,7 @@ const App = () => {
               <Route component={NotFound} />
             </Switch>
           </div>
+          <Footer />
         </Fragment>
       </Router>
     </SwapiState>

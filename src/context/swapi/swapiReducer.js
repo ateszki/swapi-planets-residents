@@ -2,11 +2,10 @@ import {
     GET_PLANETS,
     GET_PLANET,
     GET_RESIDENT,
-    /*
     CLEAR_PLANET,
-    FILTER_PLANETS,
-    CLEAR_RESIDENT, */
-    SET_LOADING
+    CLEAR_RESIDENT,
+    SET_LOADING,
+    FILTER_PLANETS
 } from '../types';
 
 const swapiReducer = (state,action) => {
@@ -30,24 +29,22 @@ const swapiReducer = (state,action) => {
                 resident: action.payload,
                 loading: false
             }
-/*         case CLEAR_USERS:
+        case FILTER_PLANETS:
             return {
                 ...state,
-                users: [],
-                loading: false
+                filter: action.payload
             }
-        case GET_USER:
+        case CLEAR_PLANET:
             return {
                 ...state,
-                user: action.payload,
-                loading:false
+                planet: {},
+                resident: {}
             }
-        case GET_REPOS:
+        case CLEAR_RESIDENT:
             return {
                 ...state,
-                repos: action.payload,
-                loading: false
-            }*/
+                resident: {}
+            }
         case SET_LOADING:
             return {
                 ...state,
