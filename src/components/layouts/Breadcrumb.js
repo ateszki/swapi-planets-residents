@@ -11,13 +11,13 @@ const Breadcrumb = () =>  {
         text: "All planets"
     }];
     
-    if(Object.keys(planet).length !== 0) crumbs.push({to: `/planet/${planet.slug}`, text: planet.name});
-    if(Object.keys(planet).length !== 0 && Object.keys(resident).length !== 0) crumbs.push({to: `/planet/${planet.slug}/resident/${resident.slug}`, text: resident.name});
+    if(typeof planet !== "undefined" && Object.keys(planet).length !== 0) crumbs.push({to: `/planet/${planet.slug}`, text: planet.name});
+    if(typeof planet !== "undefined" && Object.keys(planet).length !== 0 && typeof resident !== "undefined" && Object.keys(resident).length !== 0) crumbs.push({to: `/planet/${planet.slug}/resident/${resident.slug}`, text: resident.name});
     
     return (
-        <div className="w-full bg-gray-200 py-4 px-4">
-           <div  className="container mx-auto">
-                {crumbs.map((crumb, idx) => (<span key={idx}><Link className="underline" to={crumb.to}> &gt; {crumb.text}</Link></span>))}            
+        <div className="w-full bg-yellow-500 py-4 px-4">
+           <div  className="container mx-auto pl-2">
+    {crumbs.map((crumb, idx) => (<span key={idx}>{idx > 0 && " > "}<Link className="underline" to={crumb.to}>{crumb.text}</Link></span>))}            
            </div>
         </div>
     )

@@ -32,7 +32,8 @@ const swapiReducer = (state,action) => {
         case GET_RESIDENT:
             return {
                 ...state,
-                resident: action.payload
+                resident: action.payload,
+                loading: {...state.loading, resident: false}
             }
         case FILTER_PLANETS:
             return {
@@ -52,8 +53,6 @@ const swapiReducer = (state,action) => {
                 resident: {}
             }
         case SET_LOADING:
-            //let loading = {...state.loading}
-            //loading[action.payload] = true; 
             return {
                 ...state,
                 loading: {

@@ -3,6 +3,7 @@ import Residents from '../residents/Residents';
 import SwapiContext from '../../context/swapi/swapiContext'; 
 import Spinner from '../layouts/Spinner';
 import Breadcrumb from '../layouts/Breadcrumb';
+import NotFound from '../pages/NotFound';
 
 
 const Planet = ({ match }) => {
@@ -24,6 +25,9 @@ const Planet = ({ match }) => {
 
      
     if (loading.planet) return <Spinner />;
+
+    if(typeof planet === "undefined") return <NotFound />
+
     const {climate,terrain, gravity, diameter, population } = planet;
     return (
         <div>

@@ -72,10 +72,13 @@ const SwapiState = props => {
     }
 
     // get residents
-    const getResidents = async planet_slug => {
+    const getResidents = async (planet_slug, resident_slug) => {
         setLoading('residents');
-        
+        //const {planet_slug, resident_slug} = params;
+
         const planet = state.planets.find(planet => planet.slug === planet_slug);
+        
+        if(typeof planet === "undefined") return;
         
         const residents = await Promise.all(planet.residents.map(async endpoint => {
             const res = await axios.get(endpoint);
@@ -83,15 +86,12 @@ const SwapiState = props => {
             resident.slug = slug(resident.name);
             return resident;
         }));
-        
-        dispatch({ type: GET_RESIDENTS, payload: { residents } } );     
-    }
 
-    // get resident from slug
-    const getResident = async resident_slug => {
-        const resident = state.residents.find(resident => resident.slug === resident_slug);
-        
-        dispatch({ type: GET_RESIDENT, payload: resident } );     
+        if(typeof resident_slug !== "undefined"){
+            const resident = residents.find(resident => resident.slug === resident_slug);
+            dispatch({ type: GET_RESIDENT, payload: resident } );
+        }
+        dispatch({ type: GET_RESIDENTS, payload: { residents } } );     
     }
 
     const filterPlanets = text =>  dispatch({ type: FILTER_PLANETS, payload: text});
@@ -114,7 +114,6 @@ const SwapiState = props => {
         filter: state.filter,
         getPlanets,
         getPlanet,
-        getResident,
         getResidents,
         filterPlanets,       
         clearPlanet,

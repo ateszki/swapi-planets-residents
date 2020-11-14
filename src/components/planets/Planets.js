@@ -22,7 +22,7 @@ const Planets = () => {
     if (loading.planets) return <Spinner />;
     
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto px-2">
             <Filter />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 { planets.filter(planet => planet.name.toLowerCase().indexOf(filter) > -1).map((planet, index) => (<PlanetItem key={index} planet={planet} />)) }
