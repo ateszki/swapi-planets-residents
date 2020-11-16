@@ -9,3 +9,21 @@ The app brings in all planets from SWAPI and then let the user list each planet 
 - Axios
 - React Router
 - Slug
+- Tailwind
+
+## INSTALL DEPENDENCIES
+
+```
+npm install
+```
+
+## RUN DE PROJECT 
+
+```
+npm start
+```
+
+## TEST DE PROJECT 
+```
+npm start
+```
