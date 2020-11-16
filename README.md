@@ -17,13 +17,13 @@ The app brings in all planets from SWAPI and then let the user list each planet 
 npm install
 ```
 
-## RUN DE PROJECT 
+## RUN THE PROJECT 
 
 ```
 npm start
 ```
 
-## TEST DE PROJECT 
+## TEST THE PROJECT 
 ```
 npm start
 ```
